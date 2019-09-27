@@ -1,1 +1,65 @@
 
+<!DOCTYPE html>
+<html>
+    <head>
+      <style>
+          input {
+            height: 40px;
+            margin: 40px;
+            border-color: green;
+            border-size: 3px;
+            text-align: center;
+          }
+          p {
+            font-size: 30px;
+            margin: 40px;
+          }
+      </style>
+    </head>
+    <body>
+        <input type="text" placeholder="Enter positive number">
+        <p>Result : <strong>0</strong></p>
+        <script type="text/javascript">
+          let input_node = document.querySelector('input');
+          input_node.addEventListener('input', processInput);
+          function isSquare(num) {
+            if (num > 0 && Math.sqrt(num) % 1 == 0) {
+              return Math.sqrt(num)
+            } else {
+              return false;
+            }
+          }
+
+          function get_min_count(num) {
+            let cur = num;
+            let count = 0;
+            while (cur > 1) {
+              let sq = isSquare(cur);
+              if (sq) {
+                cur = sq;
+              } else {
+                cur = cur - 1;
+              }
+              count = count + 1;
+            }
+            return count;
+          }
+
+          function processInput(e) {
+            let value = e.target.value;
+            let p_node = document.querySelector('p');
+            if (value) {
+              value = parseInt(value);
+              if (value && value > 0) {
+                let res = get_min_count(value);
+                p_node.innerHTML='Result : <strong>' + res + '</strong>';
+              } else {
+                p_node.innerHTML='Enter postive integer'
+              }
+            } else {
+              p_node.innerHTML='Result : <strong>' + 0 + '</strong>';
+            }
+          }
+        </script>
+    </body>
+</html>
